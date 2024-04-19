@@ -1,0 +1,41 @@
+@font-face {
+    font-family: "Pokemon Hollow";
+    src: url(font/Pokemon\ Hollow.ttf);
+}
+
+h1 {
+    font-family: "Pokemon Hollow";
+    margin: -50px 24px;
+    font-size: 100px;
+}
+
+body {
+  margin: 0;
+}
+
+#pokedex {
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
+}
+
+.pokemonCard {
+  background-color: rgb(214, 22, 22);
+  color: white;
+  display: flex;
+  justify-content: center;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  font-family: "Pokemon Hollow";
+}
+
+#pokemonImage {
+  height: 100px;
+}
+
+.pokeball {
+  position: absolute;
+  right: -20px;
+  top: -20px;
+  height: 300px;
+}
