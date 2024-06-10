@@ -1,41 +1,670 @@
 @font-face {
-    font-family: "Pokemon Hollow";
-    src: url(font/Pokemon\ Hollow.ttf);
+  font-family: "GROBOLD"; /* Name your font family */
+  src: url("/font/GROBOLD.ttf"); /* Locate the .ttf file within your directory*/
 }
 
-h1 {
-    font-family: "Pokemon Hollow";
-    margin: -50px 24px;
-    font-size: 100px;
+@font-face {
+  font-family: "Pokemon Hollow"; /* Name your font family */
+  src: url("/font/Pokemon\ Hollow.ttf"); /* Locate the .ttf file within your directory*/
+}
+
+@font-face {
+  font-family: "Pokemon Solid"; /* Name your font family */
+  src: url("/font/Pokemon\ Solid.ttf"); /* Locate the .ttf file within your directory*/
 }
 
 body {
   margin: 0;
+  font-family: "GROBOLD", sans-serif;
+  background: rgb(27, 27, 80)
+    radial-gradient(rgba(229, 224, 255, 0.618), rgb(27, 27, 80));
 }
 
-#pokedex {
+html {
+  scroll-behavior: smooth;
+}
+
+header {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(26, 23, 56)
+    radial-gradient(rgba(229, 224, 255, 0.618), rgb(26, 23, 56));
+  border-bottom: 2px solid;
+  filter: drop-shadow(3px 4px 2px #111126);
+}
+
+h1 {
+  font-family: "Pokemon Hollow", Times, serif;
+  color: rgb(255, 61, 0);
+  font-size: 100px;
+  position: absolute;
+  top: 0;
+  left: 76px;
+  margin: -67px;
+  filter: drop-shadow(3px 4px 2px #111126);
+}
+
+.pokedexImg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  filter: drop-shadow(3px 4px 2px #111126);
+}
+
+.pokedexContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 24px;
+}
+
+.pokedex {
   display: flex;
   justify-content: center;
-  margin-top: 200px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.loadMorePokemon {
+  font-family: "GROBOLD", Times, serif;
+  margin: 20px 20px;
+  font-size: 24px;
+  border: 3px solid rgb(0, 0, 0);
+  border-radius: 8px;
+  color: rgb(57, 56, 60);
+  background: rgb(245, 63, 2)
+    radial-gradient(rgba(255, 239, 224, 0.618), rgb(245, 63, 2));
+  filter: drop-shadow(3px 4px 2px #111126);
+}
+
+.loadMorePokemon:hover {
+  cursor: pointer;
+  color: rgb(24, 24, 25);
+  background: rgb(189, 54, 9)
+    radial-gradient(rgba(255, 239, 224, 0.618), rgb(189, 54, 9));
+  filter: drop-shadow(3px 4px 2px #111126);
+}
+
+.foundPokemon {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 24px;
 }
 
 .pokemonCard {
-  background-color: rgb(214, 22, 22);
-  color: white;
+  background: rgb(255, 217, 0)
+    radial-gradient(rgb(255, 255, 224), rgb(255, 217, 0));
+  border: 1px solid #000;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  width: 100px;
+  height: 153px;
+  transition: all 0.2s ease-in-out;
+  filter: drop-shadow(3px 4px 2px #111126);
+}
+
+.pokemonCard:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.pokemonName {
+  font-family: "GROBOLD", sans-serif;
+}
+
+.number {
+  font-family: "GROBOLD", sans-serif;
+  font-size: 10px;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin: -8px;
+}
+
+.numberDiv {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pokemonImg {
+  height: 50px;
+  filter: drop-shadow(3px 4px 2px #111126);
+}
+
+.pokemonBackground {
+  height: 80px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(3px 4px 2px #111126);
+}
+
+.water {
+  background: rgb(8, 0, 255)
+    radial-gradient(rgba(229, 224, 255, 0.618), rgb(8, 0, 255));
+}
+
+.fire {
+  background: rgb(255, 0, 0)
+    radial-gradient(rgba(255, 224, 224, 0.618), rgb(255, 0, 0));
+}
+
+.electric {
+  background: rgb(255, 187, 0)
+    radial-gradient(rgba(251, 255, 224, 0.618), rgb(255, 187, 0));
+}
+
+.ground {
+  background: rgb(172, 46, 3)
+    radial-gradient(rgba(255, 239, 224, 0.618), rgb(172, 46, 3));
+}
+
+.rock {
+  background: rgb(70, 71, 76)
+    radial-gradient(rgba(224, 229, 255, 0.618), rgb(70, 71, 76));
+}
+
+.grass {
+  background: rgb(33, 149, 10)
+    radial-gradient(rgba(224, 255, 228, 0.618), rgb(33, 149, 10));
+}
+
+.default {
+  background: rgb(89, 10, 149)
+    radial-gradient(rgba(244, 224, 255, 0.618), rgb(89, 10, 149));
+}
+
+.flying {
+  background: rgb(10, 137, 149)
+    radial-gradient(rgba(224, 252, 255, 0.618), rgb(10, 137, 149));
+}
+
+.fairy {
+  background: rgb(251, 29, 206)
+    radial-gradient(rgba(255, 224, 252, 0.618), rgb(251, 29, 206));
+}
+
+.normal {
+  background: rgb(87, 80, 102)
+    radial-gradient(rgba(255, 224, 252, 0.618), rgb(87, 80, 102));
+}
+
+.fighting {
+  background: rgb(255, 102, 46)
+    radial-gradient(rgba(255, 224, 252, 0.618), rgb(255, 102, 46));
+}
+
+.psychic {
+  background: rgb(118, 80, 201)
+    radial-gradient(rgba(255, 224, 252, 0.618), rgb(118, 80, 201));
+}
+
+.infoType {
   display: flex;
   justify-content: center;
-  border-top-left-radius: 40px;
-  border-top-right-radius: 40px;
-  font-family: "Pokemon Hollow";
+  margin-top: 8px;
 }
 
-#pokemonImage {
-  height: 100px;
+.fullscreenBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 
-.pokeball {
+.fullscreenCard {
+  background: rgb(255, 217, 0)
+    radial-gradient(rgb(255, 255, 224), rgb(255, 217, 0));
+  filter: drop-shadow(3px 4px 2px #111126);
+  width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.closeButton {
+  font-size: 50px;
+  color: rgb(30, 29, 29);
+  transition: all 0.2s ease-in-out;
+}
+
+.closeButton:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  filter: drop-shadow(3px 4px 2px #111126);
+}
+
+.arrowns {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.prevCard {
+  font-family: "GROBOLD", sans-serif;
+  background: rgb(106, 101, 74)
+    radial-gradient(rgb(255, 255, 224), rgb(106, 101, 74));
+  filter: drop-shadow(3px 4px 2px #111126);
+  border-top-left-radius: 10px;
+  cursor: pointer;
+  width: 100px;
+  text-align: center;
+  padding: 10px;
+}
+
+.nextCard {
+  font-family: "GROBOLD", sans-serif;
+  background: rgb(106, 101, 74)
+    radial-gradient(rgb(255, 255, 224), rgb(106, 101, 74));
+  filter: drop-shadow(3px 4px 2px #111126);
+  border-top-right-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  width: 100px;
+  padding: 10px;
+}
+
+.prevCard:hover {
+  background: rgb(43, 41, 29)
+    radial-gradient(rgb(255, 255, 224), rgb(43, 41, 29));
+}
+
+.nextCard:hover {
+  background: rgb(43, 41, 29)
+    radial-gradient(rgb(255, 255, 224), rgb(43, 41, 29));
+}
+
+.numberFullscreen {
+  font-family: "GROBOLD", sans-serif;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: -16px;
+}
+
+.nameDIv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.nameFullscreen {
+  font-family: "GROBOLD", sans-serif;
+  font-size: 40px;
+}
+
+.typeBackgroundFullscreen {
+  height: 175px;
+  width: 310px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(3px 4px 2px #111126);
+}
+
+.pokemonImgFullscreen {
+  height: 150px;
+  filter: drop-shadow(3px 4px 2px #111126);
+}
+
+.infoBox {
+  font-family: "GROBOLD", sans-serif;
+  background: rgb(243 243 243)
+    radial-gradient(rgb(255, 255, 255), rgb(243, 243, 243));
+  filter: drop-shadow(3px 4px 2px #111126);
+  border: solid 3px #b7b3b3;
+  border-radius: 10px;
+  padding: 4px;
+  margin-top: 8px;
+}
+
+.infoNavbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navButton {
+  background: rgb(206, 206, 206)
+    radial-gradient(rgb(255, 255, 224), rgb(206, 206, 206));
+  filter: drop-shadow(3px 4px 2px #111126);
+  padding: 4px 28px;
+  border-radius: 10px;
+}
+
+.navButton:hover {
+  background: rgb(131, 131, 131)
+    radial-gradient(rgb(255, 255, 255), rgb(131, 131, 131));
+  cursor: pointer;
+}
+
+.infoDiv {
+  background: rgb(240, 240, 240)
+    radial-gradient(rgb(255, 238, 238), rgb(240, 240, 240));
+  border: solid 1px #b7b3b3;
+  border-radius: 10px;
+  padding: 4px;
+  margin-top: 8px;
+  filter: drop-shadow(3px 4px 2px #111126);
+}
+
+.info {
+  margin-top: 4px;
+  display: flex;
+  align-items: baseline;
+  text-wrap: wrap;
+}
+
+.infotext {
+  font-size: 24px;
+  margin-right: 4px;
+  padding: 4px;
+}
+
+.abilitiesText {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.statsDiv {
+  height: 230px;
+}
+
+.chart {
+  display: flex;
+  flex-direction: column;
+  margin-top: 13px;
+  width: 304px;
+  filter: drop-shadow(3px 4px 2px #111126);
+}
+
+.hp {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  background: rgb(252, 55, 55)
+    radial-gradient(rgba(255, 224, 224, 0.618), rgb(252, 55, 55));
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.attack {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  background: rgb(245, 129, 87)
+    radial-gradient(rgba(255, 224, 252, 0.618), rgb(245, 129, 87));
+}
+
+.defense {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  background: rgb(255, 208, 77)
+    radial-gradient(rgba(251, 255, 224, 0.618), rgb(255, 208, 77));
+}
+
+.specialAttack {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  background: rgb(70, 63, 255)
+    radial-gradient(rgba(229, 224, 255, 0.618), rgb(70, 63, 255));
+}
+
+.specialDefense {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  background: rgb(88, 207, 65)
+    radial-gradient(rgba(224, 255, 228, 0.618), rgb(88, 207, 65));
+}
+
+.speed {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  background: rgb(255, 123, 229)
+    radial-gradient(rgba(255, 224, 252, 0.618), rgb(255, 123, 229));
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.hpBar {
+  background: rgb(255, 0, 0)
+    radial-gradient(rgba(255, 224, 224, 0.618), rgb(255, 0, 0));
+  width: 10px;
+  margin-left: 108.6px;
+  padding: 4px;
+  filter: drop-shadow(3px 4px 2px #111126);
+  animation: 3s in-out forwards;
+}
+
+.attackBar {
+  background: rgb(255, 102, 46)
+    radial-gradient(rgba(255, 224, 252, 0.618), rgb(255, 102, 46));
+  width: 10px;
+  margin-left: 79px;
+  padding: 4px;
+  filter: drop-shadow(3px 4px 2px #111126);
+}
+
+.defenseBar {
+  background: rgb(255, 187, 0)
+    radial-gradient(rgba(251, 255, 224, 0.618), rgb(255, 187, 0));
+  width: 10px;
+  margin-left: 67px;
+  padding: 4px;
+  filter: drop-shadow(3px 4px 2px #111126);
+}
+
+.specialAttackBar {
+  background: rgb(8, 0, 255)
+    radial-gradient(rgba(229, 224, 255, 0.618), rgb(8, 0, 255));
+  width: 10px;
+  margin-left: 18px;
+  padding: 4px;
+  filter: drop-shadow(3px 4px 2px #111126);
+}
+
+.specialDefenseBar {
+  background: rgb(33, 149, 10)
+    radial-gradient(rgba(224, 255, 228, 0.618), rgb(33, 149, 10));
+  width: 10px;
+  margin-left: 5px;
+  padding: 4px;
+  filter: drop-shadow(3px 4px 2px #111126);
+}
+
+.speedBar {
+  background: rgb(251, 29, 206)
+    radial-gradient(rgba(255, 224, 252, 0.618), rgb(251, 29, 206));
+  width: 10px;
+  margin-left: 82px;
+  padding: 4px;
+  filter: drop-shadow(3px 4px 2px #111126);
+}
+
+.LoadingScreen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgb(26, 23, 56)
+    radial-gradient(rgba(229, 224, 255, 0.618), rgb(26, 23, 56));
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 200px;
+  color: rgb(255, 123, 0);
+  font-size: 100px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(16, 16, 23)
+    radial-gradient(rgba(229, 224, 255, 0.618), rgb(16, 16, 23));
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(245, 63, 2)
+    radial-gradient(rgba(255, 239, 224, 0.618), rgb(245, 63, 2));
+  border-radius: 4px;
+  filter: drop-shadow(3px 4px 2px #111126);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(214, 56, 3, 0.908)
+    radial-gradient(rgba(255, 239, 224, 0.618), rgb(214, 56, 3, 0.908));
+  cursor: default;
+}
+
+input[type="text"] {
+  font: 15px/24px "GROBOLD", sans-serif;
+  color: #000000;
+  width: 200px;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+}
+
+input:focus {
+  outline: none;
+}
+
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.inputContainer {
+  float: left;
+  width: 100%;
+  position: relative;
+  margin-top: 60px;
+}
+
+.inputEffect ~ .focusBorder {
   position: absolute;
-  right: -20px;
-  top: -20px;
-  height: 300px;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: rgb(0, 0, 0);
+  transition: 0.4s;
+}
+.inputEffect:focus ~ .focusBorder,
+.has-content.inputEffect ~ .focusBorder {
+  width: 100%;
+  transition: 0.4s;
+}
+.inputEffect ~ label {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 9px;
+  color: rgb(174, 234, 0);
+  transition: 0.3s;
+  z-index: -1;
+  letter-spacing: 0.5px;
+}
+.inputEffect:focus ~ label,
+.has-content.inputEffect ~ label {
+  top: -26px;
+  font-size: 24px;
+  color: rgb(174, 234, 0);
+  transition: 0.3s;
+}
+
+.inputEffect {
+  border: 0;
+  padding: 4px 0;
+  border-bottom: 3px solid rgb(227, 232, 214);
+  background-color: transparent;
+}
+
+@media (max-width: 1020px) {
+  .headerItems {
+    margin-left: 210px;
+  }
+}
+
+@media (max-width: 835px) {
+  header {
+    justify-content: flex-end;
+  }
+  .pokedexImg {
+    display: none;
+  }
+  .headerItems {
+    margin: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  header {
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 66px;
+    position: relative;
+    left: 0;
+    margin-top: -43px;
+  }
+}
+
+@media (max-width: 600px) {
+  .loading {
+    font-size: 50px;
+  }
+}
+
+@media (max-width: 400px) {
+  .fullscreenCard {
+    width: 270px;
+  }
+  .prevCard {
+    width: 85px;
+  }
+  .nextCard {
+    width: 85px;
+  }
+  .navButton {
+    padding: 4px 22px;
+  }
+  .infotext {
+    font-size: 22px;
+  }
 }

@@ -4,19 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="img/png" href="img/pokeball.png" />
+    <link rel="icon" type="img/png" href="img/icons8-pokedex-96.png" />
     <title>Pokedex</title>
   </head>
-  <body onload="loadPokedex()">
-    <h1>Pokedex</h1>
-    <img class="pokeball" src="img/pokeball.png" alt="background" />
-    <div id="pokedex">
-      <div class="pokemonCard">
-        <h2 id="pokemonName"></h2>
-        <img id="pokemonImage" />
+  <body onload="init()">
+    <header>
+      <h1>Pokedex</h1>
+      <div class="headerItems">
+        <div class="inputContainer">
+          <input class="inputEffect" type="text" placeholder="" id="searchPokemon" onkeyup="searchPokemon()">
+          <label>Pokemon Name</label>
+          <span class="focusBorder"></span>
+        </div>
+        <img class="pokedexImg" src="/img/icons8-pokedex-96.png" alt="background" />
       </div>
+    </header>
+    <div class="foundPokemon" id="foundPokemon"></div>
     </div>
+    <div class="pokedexContainer" id="pokedexContainer">
+      <div class="pokedex" id="pokedex"></div>
+      <button class="loadMorePokemon" id="loadMorePokemon" onclick="loadMorePokemon()">Load More</button>
+    </div>
+    <div class="fullscreenBackground" id="fullscreenBackground">
+      <div class="fullscreenCard" id="fullscreenCard"></div>
+    </div>
+    <div class="LoadingScreen" id="LoadingScreen">
+      <div class="loading">
+        <p>LOADING...</p>
+      </div>
 
+    </div>
+    
     <script src="script.js"></script>
+    <script src="dataStorage.js"></script>
+    <script src="generateHTML.js"></script>
   </body>
 </html>
