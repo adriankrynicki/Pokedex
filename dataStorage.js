@@ -43,33 +43,37 @@ async function fetch500Pokemons() {
     }
   }
 
-  // Fetch und Render kombiniert
 async function fetchLimitedPokemons(offset, limit) {
-    try {
-      const response = await fetch(
-        `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      for (const pokemon of data.results) {
-        await fetchPokemonDetails(pokemon);
-      }
-    } catch (error) {
-      console.error("Error fetching Pokemon data:", error);
+  try {
+    const response = await fetch(BASE_URL);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-  }
-  
-  async function fetchPokemonDetails(pokemon) {
-    try {
-      const response = await fetch(pokemon.url);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const pokeData = await response.json();
-      renderPokemon(pokeData);
-    } catch (error) {
-      console.error("Error fetching Pokemon details:", error);
+
+    const data = await response.json();
+    const limitedPokemonData = data.results.slice(offset,offset + limit);
+
+    for (const pokemon of limitedPokemonData) {
+      await fetchPokemonDetails(pokemon);
     }
+  } catch (error) {
+    console.error("Error fetching Pokemon data:", error);
   }
+}
+
+async function fetchPokemonDetails(pokemon) {
+  try {
+    const response = await fetch(pokemon.url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const pokeData = await response.json();
+    await renderPokemon(pokeData);
+  } catch (error) {
+    console.error("Error fetching Pokemon details:", error);
+  }
+}
+

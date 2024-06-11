@@ -1,23 +1,29 @@
 @font-face {
-  font-family: "GROBOLD"; /* Name your font family */
-  src: url("/font/GROBOLD.ttf"); /* Locate the .ttf file within your directory*/
+  font-family: "GROBOLD";
+  src: url(font/GROBOLD.ttf);
 }
 
 @font-face {
-  font-family: "Pokemon Hollow"; /* Name your font family */
-  src: url("/font/Pokemon\ Hollow.ttf"); /* Locate the .ttf file within your directory*/
+  font-family: "Pokemon Hollow";
+  src: url(font/Pokemon\ Hollow.ttf);
 }
 
 @font-face {
-  font-family: "Pokemon Solid"; /* Name your font family */
-  src: url("/font/Pokemon\ Solid.ttf"); /* Locate the .ttf file within your directory*/
+  font-family: "Pokemon Solid";
+  src: url(font/Pokemon\ Solid.ttf);
 }
 
 body {
   margin: 0;
+  max-width: 3000px;
+  padding: 0;
+  width: 100%;
+  height: 100%;
   font-family: "GROBOLD", sans-serif;
   background: rgb(27, 27, 80)
     radial-gradient(rgba(229, 224, 255, 0.618), rgb(27, 27, 80));
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 html {
@@ -41,9 +47,15 @@ h1 {
   font-size: 100px;
   position: absolute;
   top: 0;
-  left: 76px;
+  left: 93px;
   margin: -67px;
   filter: drop-shadow(3px 4px 2px #111126);
+  transition: all 0.2s ease-in-out;
+}
+
+h1:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
 .pokedexImg {
@@ -103,8 +115,8 @@ h1 {
   margin: 10px;
   padding: 10px;
   text-align: center;
-  width: 100px;
-  height: 153px;
+  width: 150px;
+  height: 200px;
   transition: all 0.2s ease-in-out;
   filter: drop-shadow(3px 4px 2px #111126);
 }
@@ -116,11 +128,12 @@ h1 {
 
 .pokemonName {
   font-family: "GROBOLD", sans-serif;
+  font-size: 24px;
 }
 
 .number {
   font-family: "GROBOLD", sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   display: flex;
   align-items: baseline;
   gap: 4px;
@@ -133,12 +146,12 @@ h1 {
 }
 
 .pokemonImg {
-  height: 50px;
+  height: 70px;
   filter: drop-shadow(3px 4px 2px #111126);
 }
 
 .pokemonBackground {
-  height: 80px;
+  height: 130px;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -392,6 +405,7 @@ h1 {
 .chart {
   display: flex;
   flex-direction: column;
+  font-size: 12px;
   margin-top: 13px;
   width: 304px;
   filter: drop-shadow(3px 4px 2px #111126);
@@ -453,8 +467,8 @@ h1 {
   background: rgb(255, 0, 0)
     radial-gradient(rgba(255, 224, 224, 0.618), rgb(255, 0, 0));
   width: 10px;
-  margin-left: 108.6px;
-  padding: 4px;
+  margin-left: 82px;
+  padding: 6px;
   filter: drop-shadow(3px 4px 2px #111126);
   animation: 3s in-out forwards;
 }
@@ -463,8 +477,8 @@ h1 {
   background: rgb(255, 102, 46)
     radial-gradient(rgba(255, 224, 252, 0.618), rgb(255, 102, 46));
   width: 10px;
-  margin-left: 79px;
-  padding: 4px;
+  margin-left: 60px;
+  padding: 6px;
   filter: drop-shadow(3px 4px 2px #111126);
 }
 
@@ -472,8 +486,8 @@ h1 {
   background: rgb(255, 187, 0)
     radial-gradient(rgba(251, 255, 224, 0.618), rgb(255, 187, 0));
   width: 10px;
-  margin-left: 67px;
-  padding: 4px;
+  margin-left: 51px;
+  padding: 6px;
   filter: drop-shadow(3px 4px 2px #111126);
 }
 
@@ -481,8 +495,8 @@ h1 {
   background: rgb(8, 0, 255)
     radial-gradient(rgba(229, 224, 255, 0.618), rgb(8, 0, 255));
   width: 10px;
-  margin-left: 18px;
-  padding: 4px;
+  margin-left: 15px;
+  padding: 6px;
   filter: drop-shadow(3px 4px 2px #111126);
 }
 
@@ -491,7 +505,7 @@ h1 {
     radial-gradient(rgba(224, 255, 228, 0.618), rgb(33, 149, 10));
   width: 10px;
   margin-left: 5px;
-  padding: 4px;
+  padding: 6px;
   filter: drop-shadow(3px 4px 2px #111126);
 }
 
@@ -499,8 +513,8 @@ h1 {
   background: rgb(251, 29, 206)
     radial-gradient(rgba(255, 224, 252, 0.618), rgb(251, 29, 206));
   width: 10px;
-  margin-left: 82px;
-  padding: 4px;
+  margin-left: 63px;
+  padding: 6px;
   filter: drop-shadow(3px 4px 2px #111126);
 }
 
@@ -601,7 +615,7 @@ label {
 .inputEffect:focus ~ label,
 .has-content.inputEffect ~ label {
   top: -26px;
-  font-size: 24px;
+  font-size: 20px;
   color: rgb(174, 234, 0);
   transition: 0.3s;
 }
@@ -627,7 +641,7 @@ label {
     display: none;
   }
   .headerItems {
-    margin: 20px;
+    margin: 8px;
   }
 }
 
@@ -641,7 +655,7 @@ label {
     font-size: 66px;
     position: relative;
     left: 0;
-    margin-top: -43px;
+    margin-top: -20px;
   }
 }
 
@@ -651,9 +665,9 @@ label {
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
   .fullscreenCard {
-    width: 270px;
+    width: 283px;
   }
   .prevCard {
     width: 85px;
@@ -665,6 +679,22 @@ label {
     padding: 4px 22px;
   }
   .infotext {
-    font-size: 22px;
+    font-size: 20px;
+  }
+  .pokemonCard {
+    width: 220px;
+    height: 300px;
+  }
+  .pokemonBackground {
+    height: 210px;
+  }
+  .pokemonImg {
+    height: 100px;
+  }
+  .pokemonName {
+    font-size: 32px;
+  }
+  .number {
+    font-size: 12px;
   }
 }

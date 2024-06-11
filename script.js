@@ -4,37 +4,43 @@ let currentPokemonId;
 let maxPokemonId = 500;
 
 
+const typeClasses = [
+  "water", "fire", "electric", "ground", "rock",
+  "grass", "flying", "fairy", "normal", "fighting", "psychic"
+];
+
 function getTypeClass(types) {
-  if (types.includes("water")) return "water";
-  if (types.includes("fire")) return "fire";
-  if (types.includes("electric")) return "electric";
-  if (types.includes("ground")) return "ground";
-  if (types.includes("rock")) return "rock";
-  if (types.includes("grass")) return "grass";
-  if (types.includes("flying")) return "flying";
-  if (types.includes("fairy")) return "fairy";
-  if (types.includes("normal")) return "normal";
-  if (types.includes("fighting")) return "fighting";
-  if (types.includes("psychic")) return "psychic";
+  for (const type of types) {
+    const index = typeClasses.indexOf(type);
+    if (index !== -1) return typeClasses[index];
+  }
   return "default";
 }
 
+const statClasses = {
+  hp: "hp",
+  attack: "attack", 
+  defense: "defense",
+  "special-attack": "specialAttack",
+  "special-defense": "specialDefense",
+  speed: "speed"
+};
+
 function getStatClass(stat) {
-  if (stat.includes("hp")) return "hp";
-  if (stat.includes("attack")) return "attack";
-  if (stat.includes("defense")) return "defense";
-  if (stat.includes("special-attack")) return "specialAttack";
-  if (stat.includes("special-defense")) return "specialDefense";
-  if (stat.includes("speed")) return "speed";
+  return statClasses[Object.keys(statClasses).find(key => stat.includes(key))] || "";
 }
 
+const statClassBars = {
+  hp: "hpBar",
+  attack: "attackBar",
+  defense: "defenseBar",
+  "special-attack": "specialAttackBar", 
+  "special-defense": "specialDefenseBar",
+  speed: "speedBar"
+};
+
 function getStatClassBar(stat) {
-  if (stat.includes("hp")) return "hpBar";
-  if (stat.includes("attack")) return "attackBar";
-  if (stat.includes("defense")) return "defenseBar";
-  if (stat.includes("special-attack")) return "specialAttackBar";
-  if (stat.includes("special-defense")) return "specialDefenseBar";
-  if (stat.includes("speed")) return "speedBar";
+  return statClassBars[Object.keys(statClassBars).find(key => stat.includes(key))] || "";
 }
 
 function formatWeight(num) {
@@ -106,13 +112,14 @@ function nextCard() {
   }
 }
 
-function renderPokemon(pokeData) {
+async function renderPokemon(pokeData) {
   let pokedex = document.getElementById("pokedex");
   let typeClasses = pokeData.types.map((typeInfo) => typeInfo.type.name);
   let typeClass = getTypeClass(typeClasses);
 
   let pokeInnerHTML = generatePokemonCardHTML(pokeData, typeClass);
   pokedex.innerHTML += pokeInnerHTML;
+  await handleSearchPokemon();
 }
 
 async function renderSearchedPokemon(pokeData) {
@@ -132,32 +139,54 @@ async function getSearchInputAndPokemon() {
 
 function filterPokemonBySearch(allPokemon, searchInput) {
   return allPokemon.filter((pokemon) =>
-    pokemon.name.toLowerCase().startsWith(searchInput)
+    pokemon.name.toLowerCase().includes(searchInput)
   );
 }
 
-function handleEmptySearch(foundPokemon, pokedexDiv, loadMorePokemon) {
+function handleEmptySearch(foundPokemon, pokedexContainer, loadMorePokemon, notFound) {
   foundPokemon.style.display = "none";
-  pokedexDiv.style.display = "flex";
+  pokedexContainer.style.display = "flex";
   loadMorePokemon.style.visibility = 'visible';
+  notFound.style.display = "none";
 }
 
-function handleNoResults(foundPokemon, pokedexDiv, loadMorePokemon) {
-  foundPokemon.innerHTML = "<p>No Pokemon found.</p>";
-  pokedexDiv.style.display = "none";
+function handleNoResults(foundPokemon, pokedexContainer, loadMorePokemon, notFound) {
+  notFound.style.display = "flex";
+  foundPokemon.style.display = "none";
+  pokedexContainer.style.display = "none";
   loadMorePokemon.style.visibility = 'hidden'
 }
 
-async function renderFoundPokemon(filteredPokemon, foundPokemon, pokedexDiv, loadMorePokemon) {
+async function renderFoundPokemon(filteredPokemon, foundPokemon, pokedexContainer, loadMorePokemon, notFound) {
   foundPokemon.innerHTML = "";
   for (let pokemonData of filteredPokemon) {
     let pokeData = await fetchPokemonUrl(pokemonData.url);
     renderSearchedPokemon(pokeData);
-    pokedexDiv.style.display = "none";
+    notFound.style.display = "none";
+    pokedexContainer.style.display = "none";
     foundPokemon.style.display = "flex";
     loadMorePokemon.style.visibility = 'hidden'
   }
 }
+
+async function handleSearchPokemon() {
+  let { searchInput, allPokemon } = await getSearchInputAndPokemon();
+  let foundPokemon = document.getElementById("foundPokemon");
+  let pokedexContainer = document.getElementById("pokedexContainer");
+  let loadMorePokemon = document.getElementById("loadMorePokemon");
+  let notFound = document.getElementById("notFound");
+
+  let filteredPokemon = filterPokemonBySearch(allPokemon, searchInput);
+
+  if (searchInput === "") {
+    handleEmptySearch(foundPokemon, pokedexContainer, loadMorePokemon, notFound);
+  } else if (filteredPokemon.length === 0) {
+    handleNoResults(foundPokemon, pokedexContainer, loadMorePokemon, notFound);
+  } else {
+    await renderFoundPokemon(filteredPokemon, foundPokemon, pokedexContainer, loadMorePokemon, notFound);
+  }
+}
+
 
 async function searchPokemon() {
   showLoadingScreen();
@@ -168,27 +197,12 @@ async function searchPokemon() {
   }
 }
 
-async function handleSearchPokemon() {
-  let { searchInput, allPokemon } = await getSearchInputAndPokemon();
-  let foundPokemon = document.getElementById("foundPokemon");
-  let pokedexContainer = document.getElementById("pokedexContainer");
-  let loadMorePokemon = document.getElementById("loadMorePokemon");
-
-  let filteredPokemon = filterPokemonBySearch(allPokemon, searchInput);
-
-  if (searchInput === "") {
-    handleEmptySearch(foundPokemon, pokedexContainer, loadMorePokemon);
-  } else if (filteredPokemon.length === 0) {
-    handleNoResults(foundPokemon, pokedexContainer, loadMorePokemon);
-  } else {
-    await renderFoundPokemon(filteredPokemon, foundPokemon, pokedexContainer, loadMorePokemon);
-  }
-}
-
 function showPokemonCardFullscreen(id) {
   let fullscreenBackground = document.getElementById("fullscreenBackground");
   let fullscreenCard = document.getElementById("fullscreenCard");
   fullscreenBackground.style.display = "flex";
+  let searchInput = document.getElementById("searchPokemon");
+  searchInput.value = "";
 
   fetchPokemonId(id)
     .then(pokeData => {
@@ -218,7 +232,7 @@ async function init() {
   }
 }
 
-async function loadMorePokemon() {
+async function loadMorePokemons() {
   offset += limit;
   showLoadingScreen();
   try {
@@ -228,10 +242,32 @@ async function loadMorePokemon() {
   }
 }
 
+function reset() {
+  showLoadingScreen();
+  try {
+    window.location.reload();;
+  } finally {
+    hideLoadingScreen();
+  }
+}
+
 let searchInput = document.getElementById("searchPokemon");
 
 searchInput.addEventListener("input", function() {
   this.value = this.value.replace(/[^a-zA-Z]/g, "");
+
+  if (this.value === "") {
+    handleEmptySearch(foundPokemon, pokedexContainer, loadMorePokemon, notFound);
+  } else if (this.length === 0) {
+    handleNoResults(foundPokemon, pokedexContainer, loadMorePokemon, notFound);
+  } 
+});
+
+
+searchInput.addEventListener('keyup', async function() {
+  if (this.value.length < 3) return;
+
+  await handleSearchPokemon();
 });
 
 document.getElementById("fullscreenBackground").addEventListener("click", (event) => {
