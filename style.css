@@ -53,11 +53,6 @@ h1 {
   transition: all 0.2s ease-in-out;
 }
 
-h1:hover {
-  transform: scale(1.1);
-  cursor: pointer;
-}
-
 .pokedexImg {
   position: absolute;
   top: 0;
@@ -115,8 +110,8 @@ h1:hover {
   margin: 10px;
   padding: 10px;
   text-align: center;
-  width: 150px;
-  height: 200px;
+  width: 200px;
+  height: 300px;
   transition: all 0.2s ease-in-out;
   filter: drop-shadow(3px 4px 2px #111126);
 }
@@ -146,12 +141,12 @@ h1:hover {
 }
 
 .pokemonImg {
-  height: 70px;
+  height: 180px;
   filter: drop-shadow(3px 4px 2px #111126);
 }
 
 .pokemonBackground {
-  height: 130px;
+  height: 210px;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -334,7 +329,7 @@ h1:hover {
 }
 
 .pokemonImgFullscreen {
-  height: 150px;
+  height: 180px;
   filter: drop-shadow(3px 4px 2px #111126);
 }
 
@@ -559,12 +554,11 @@ h1:hover {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(214, 56, 3, 0.908)
     radial-gradient(rgba(255, 239, 224, 0.618), rgb(214, 56, 3, 0.908));
-  cursor: default;
 }
 
 input[type="text"] {
   font: 15px/24px "GROBOLD", sans-serif;
-  color: #000000;
+  color: lightgray;
   width: 200px;
   box-sizing: border-box;
   letter-spacing: 1px;
@@ -577,59 +571,52 @@ input:focus {
 label {
   display: inline-block;
   max-width: 100%;
-  margin-bottom: 5px;
   font-weight: 700;
-}
-
-.inputContainer {
-  float: left;
-  width: 100%;
-  position: relative;
   margin-top: 60px;
 }
 
-.inputEffect ~ .focusBorder {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: rgb(0, 0, 0);
-  transition: 0.4s;
-}
-.inputEffect:focus ~ .focusBorder,
-.has-content.inputEffect ~ .focusBorder {
-  width: 100%;
-  transition: 0.4s;
-}
-.inputEffect ~ label {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  top: 9px;
-  color: rgb(174, 234, 0);
-  transition: 0.3s;
-  z-index: -1;
-  letter-spacing: 0.5px;
-}
-.inputEffect:focus ~ label,
-.has-content.inputEffect ~ label {
-  top: -26px;
-  font-size: 20px;
-  color: rgb(174, 234, 0);
-  transition: 0.3s;
-}
 
 .inputEffect {
   border: 0;
   padding: 4px 0;
-  border-bottom: 3px solid rgb(227, 232, 214);
+  border-bottom: 1px solid rgb(0, 0, 0);
   background-color: transparent;
+}
+
+.disableNext {
+  background: rgb(164, 163, 160)
+  radial-gradient(rgb(255, 255, 224), rgb(164, 163, 160));
+  color: lightgray;
+}
+
+.disablePrev {
+  background: rgb(164, 163, 160)
+  radial-gradient(rgb(255, 255, 224), rgb(164, 163, 160));
+  color: lightgray;
+}
+
+.disablePrev:hover {
+  background: rgb(164, 163, 160)
+  radial-gradient(rgb(255, 255, 224), rgb(164, 163, 160));
+}
+
+.disableNext:hover {
+  background: rgb(164, 163, 160)
+  radial-gradient(rgb(255, 255, 224), rgb(164, 163, 160));
+}
+
+@media (max-width: 1200px) {
+  label {
+    margin-left: 170px;
+  }
 }
 
 @media (max-width: 1020px) {
   .headerItems {
     margin-left: 210px;
+  }
+  .pokedexImg {
+    width: 100px;
   }
 }
 
@@ -645,7 +632,7 @@ label {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 780px) {
   header {
     justify-content: center;
     flex-direction: column;
@@ -656,6 +643,11 @@ label {
     position: relative;
     left: 0;
     margin-top: -20px;
+  }
+  label {
+    margin-left: 24px;
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -689,12 +681,18 @@ label {
     height: 210px;
   }
   .pokemonImg {
-    height: 100px;
+    height: 210px;
   }
   .pokemonName {
     font-size: 32px;
   }
   .number {
     font-size: 12px;
+  }
+  label {
+    margin-top: 54px;
+  }
+  .inputEffect {
+    border-bottom: 1px solid lightgray;
   }
 }

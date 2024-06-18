@@ -9,13 +9,11 @@
   </head>
   <body onload="init()">
     <header>
-      <h1 onclick="reset()">Pokedex</h1>
+      <h1 onclick="renderPokemon()">Pokedex</h1>
       <div class="headerItems">
-        <div class="inputContainer">
-          <input class="inputEffect" type="text" placeholder="" id="searchPokemon">
-          <label>Pokemon Name</label>
-          <span class="focusBorder"></span>
-        </div>
+          <label>Pokemon Name:
+            <input class="inputEffect" type="text" placeholder="" id="searchPokemon" onkeyup="handleSearchPokemon()">
+          </label>
         <img class="pokedexImg" src="img/icons8-pokedex-96.png" alt="background" />
       </div>
     </header>
@@ -23,7 +21,7 @@
     </div>
     <div class="pokedexContainer" id="pokedexContainer">
       <div class="pokedex" id="pokedex"></div>
-      <button class="loadMorePokemon" id="loadMorePokemon" onclick="loadMorePokemons()">Load More</button>
+      <button class="loadMorePokemon" id="loadMorePokemon">Load More</button>
     </div>
     <div class="fullscreenBackground" id="fullscreenBackground">
       <div class="fullscreenCard" id="fullscreenCard"></div>
