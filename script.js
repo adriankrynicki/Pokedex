@@ -149,11 +149,17 @@ function renderPokemon(currentIndex, endIndex) {
 }
 
 function filterPokemonBySearch(searchInput) {
-    let pokemons = allPokemon.filter((pokemon) =>
-    pokemon.name.toLowerCase().includes(searchInput)
-  );
+  let pokemons = allPokemon.filter((pokemon) => {
+    // Check if pokemon is not null or undefined
+    if (pokemon && pokemon.name) {
+      return pokemon.name.toLowerCase().includes(searchInput);
+    }
+    return false;
+  });
+
   return pokemons;
 }
+
 
 function handleEmptySearch(foundPokemon, pokedexContainer, loadMorePokemon, notFound) {
   foundPokemon.style.display = "none";
