@@ -99,7 +99,6 @@ function displayStatsDiv() {
   statsDiv.style.display = 'flex';
 }
 
-
 function prevCard() {
   if (cardIndex > 0) {
     cardIndex--;
@@ -230,7 +229,6 @@ function closeFullscreen() {
   fullscreenCard.innerHTML = "";
 }
 
-
 async function init() {
   showLoadingScreen();
 
@@ -241,7 +239,6 @@ async function init() {
     hideLoadingScreen();
   }
 
-  // Finden Sie den Button und fügen Sie den Event-Listener hinzu
   const loadMoreButton = document.getElementById("loadMorePokemon");
   if (loadMoreButton) {
     loadMoreButton.addEventListener("click", loadMorePokemons);
